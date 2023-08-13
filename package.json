@@ -1,0 +1,30 @@
+{
+  "name": "@mikosoft/httpclient-bro",
+  "version": "1.0.0",
+  "title": "HTTPClient Bro",
+  "description": "HTTP client for browser environment",
+  "keywords": [
+    "HTTP client",
+    "browser"
+  ],
+  "author": "Mikosoft",
+  "license": "MIT",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "inst": "rm -rf node_modules && rm package-lock.json && npm install",
+    "dev": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:miko-soft/httpclient-bro.git"
+  },
+  "devDependencies": {
+    "esbuild-loader": "^2.19.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

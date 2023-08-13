@@ -1,0 +1,14 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "inst": "rm -rf node_modules && export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false && npm install"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.1.0"
+  }
+}
