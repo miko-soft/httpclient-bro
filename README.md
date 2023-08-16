@@ -1,7 +1,7 @@
 # @mikosoft/httpclient-bro
 > HTTP client for browser environment.
 
-The API is simmilar as [@mikosoft/httpclient-bro](https://www.npmjs.com/package/@mikosoft/httpclient-bro).
+The API is simmilar as [@mikosoft/httpclient-node](https://www.npmjs.com/package/@mikosoft/httpclient-node).
 
 
 ## Installation
