@@ -1,6 +1,15 @@
 class HTTPClientBro {
 
   /**
+   * Opts {
+   *  encodeURI:boolean,
+   *  timeout:number,
+   *  responseType: ''|'text'|'blob', // 'blob' for file download (https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
+   *  retry:number,
+   *  retryDelay:number,
+   *  maxRedirects:number,
+   *  headers:object
+   * }
    * @param {Object} opts - HTTP Client options {encodeURI, timeout, responseType, retry, retryDelay, maxRedirects, headers}
    */
   constructor(opts) {
@@ -38,24 +47,6 @@ class HTTPClientBro {
 
     // set interceptor
     this.interceptor;
-  }
-
-
-  /**
-   * Opts {
-   *  encodeURI:boolean,
-   *  timeout:number,
-   *  responseType: ''|'text'|'blob', // 'blob' for file download (https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
-   *  retry:number,
-   *  retryDelay:number,
-   *  maxRedirects:number,
-   *  headers:object
-   * }
-   * @param {object} opts - HTTP client options
-   * @returns {void}
-   */
-  setOptions(opts = {}) {
-    this.opts = opts;
   }
 
 
@@ -632,5 +623,5 @@ export default HTTPClientBro;
 // window
 if (typeof window !== 'undefined') {
   if (!window.mikosoft) { window.mikosoft = {}; }
-  window.mikosoft.httpclientBro = new HTTPClientBro();
+  window.mikosoft.HTTPClientBro = HTTPClientBro;
 }

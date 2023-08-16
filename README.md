@@ -1,7 +1,7 @@
 # @mikosoft/httpclient-bro
 > HTTP client for browser environment.
 
-The API is simmilar as [@mikosoft/httpclient-node](https://www.npmjs.com/package/@mikosoft/httpclient-node).
+The API is simmilar as [@mikosoft/httpclient-bro](https://www.npmjs.com/package/@mikosoft/httpclient-bro).
 
 
 ## Installation
@@ -17,7 +17,7 @@ Before you make any changes run ```npm run dev``` to build the library by the we
 
 ## Access by "window" global object
 The library can be utilized by accessing its functions and features through the window global object in a web browser environment.
-- *window.mikosoft.httpclientBro*
+- *window.mikosoft.HTTPClientBro*
 
 ```
 HTML
@@ -26,9 +26,9 @@ or
 <script src="node_modules/httpclient-bro/build/httpclient-bro.min.js">
 
 JS
-const {httpclientBro} = window.mikosoft;
-const browserCookie.setOptions(cookieOpts);
-const cookies = browserCookie.getAll();
+const { HTTPClientBro } = window.mikosoft;
+const httpClientBro = new HTTPClientBro(opts);
+const answer = httpClientBro.askOnce('http://www.adsuu.com');
 ```
 
 #### Example
@@ -41,7 +41,7 @@ A puppeteer example.
 
  const answer = await page.evaluate(() => {
     // cookies
-    const httpclientBro = window.mikosoft.httpclientBro;
+    const HTTPClientBro = window.mikosoft.HTTPClientBro;
     const opts = {
       encodeURI: false,
       timeout: 8000,
@@ -54,7 +54,7 @@ A puppeteer example.
         accept: '*/*' // 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
       }
     };
-    httpclientBro.setOptions(opts);
+    const httpClientBro = new HTTPClientBro(opts);
     const answer = httpclientBro.askJSON('https://jsonplaceholder.typicode.com/todos/1');
     return answer;
 });
@@ -67,7 +67,7 @@ console.log('answer::', answer);
 ```js
 import { HTTPClientBro } from '@mikosoft/httpclient-bro';
 
-const httpclientBro = new HTTPClientBro(cookieOpts);
+const httpClientBro = new HTTPClientBro(cookieOpts);
 ```
 
 
@@ -94,10 +94,6 @@ headers::
   'content-type': 'text/html; charset=UTF-8'
 }
 ```
-
-
-#### setOptions(opts = {}) :void
-Set option after object initialisation.
 
 
 #### *async* askOnce(url, method = 'GET', body_obj)

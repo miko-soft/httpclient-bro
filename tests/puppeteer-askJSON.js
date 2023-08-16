@@ -42,7 +42,7 @@ const main = async () => {
 
   const answer = await page.evaluate(() => {
     // cookies
-    const httpclientBro = window.mikosoft.httpclientBro;
+    const HTTPClientBro = window.mikosoft.HTTPClientBro;
     const opts = {
       encodeURI: false,
       timeout: 8000,
@@ -55,7 +55,7 @@ const main = async () => {
         accept: '*/*' // 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
       }
     };
-    httpclientBro.setOptions(opts);
+    const httpclientBro = new HTTPClientBro(opts);
     const answer = httpclientBro.askJSON('https://jsonplaceholder.typicode.com/todos/1');
     return answer;
   });
