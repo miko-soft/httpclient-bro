@@ -1,6 +1,6 @@
 {
   "name": "@mikosoft/httpclient-bro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "title": "HTTPClient Bro",
   "description": "HTTP client for browser environment",
   "keywords": [
