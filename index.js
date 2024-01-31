@@ -184,6 +184,12 @@ class HTTPClientBro {
         resolve(ans);
       };
 
+
+      // force timeout when server doesn't send response
+      setTimeout(() => {
+        reject(new Error(`Server did not respond and timeout is forced after ${this.timeout} ms.`));
+      }, this.timeout);
+
     });
 
     return promise;
