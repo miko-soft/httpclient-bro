@@ -78,8 +78,10 @@ console.log('answer::', answer);
 
 ## Access by ESM (ECMAScript Modules)
 ```js
-import {HTTPClientBroXHR, HTTPClientBroFetch} from '@mikosoft/httpclient-bro';
+import { HTTPClientBroXHR, HTTPClientBroFetch } from '@mikosoft/httpclient-bro';
 
+const httpClientBro = new HTTPClientBroXHR(opts);
+or
 const httpClientBro = new HTTPClientBroFetch(opts);
 ```
 
