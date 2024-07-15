@@ -9,6 +9,12 @@ The API is simmilar as [@mikosoft/httpclient-node](https://www.npmjs.com/package
 $ npm install --save @mikosoft/httpclient-bro
 ```
 
+
+## XHR or Fetch
+This HTTP client can be used in two ways, as [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) or as [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+
+
 ## Development
 Before you make any changes run ```npm run dev``` to build the library by the webpack.
 
@@ -17,31 +23,38 @@ Before you make any changes run ```npm run dev``` to build the library by the we
 
 ## Access by "window" global object
 The library can be utilized by accessing its functions and features through the window global object in a web browser environment.
-- *window.mikosoft.HTTPClientBro*
+- *window.mikosoft.HTTPClientBroXHR*
+- *window.mikosoft.HTTPClientBroFetch*
 
 ```
 HTML
-<script src="node_modules/httpclient-bro/build/httpclient-bro.js">
+<script src="node_modules/httpclient-bro/build/httpclient-bro-xhr.js">
+<script src="node_modules/httpclient-bro/build/httpclient-bro-xhr.min.js">
 or
-<script src="node_modules/httpclient-bro/build/httpclient-bro.min.js">
+<script src="node_modules/httpclient-bro/build/httpclient-bro-fetch.js">
+<script src="node_modules/httpclient-bro/build/httpclient-bro-fetch.min.js">
 
 JS
-const { HTTPClientBro } = window.mikosoft;
+const HTTPClientBro = window.mikosoft.HTTPClientBroXHR;
+const httpClientBro = new HTTPClientBro(opts);
+const answer = httpClientBro.askOnce('http://www.adsuu.com');
+or
+const HTTPClientBro = window.mikosoft.HTTPClientBroFetch;
 const httpClientBro = new HTTPClientBro(opts);
 const answer = httpClientBro.askOnce('http://www.adsuu.com');
 ```
 
 #### Example
-A puppeteer example.
+The HTTP client (xhr or fetch version) can be used within puppeteer script.
 
 ```js
 /*** NodeJS script ***/
 // inject to Chromium browser via <script> tag
- await page.addScriptTag({ path: '../build/httpclient-bro.min.js' });
+ await page.addScriptTag({ path: 'node_modules/httpclient-bro/build/httpclient-bro-fetch.js' });
 
  const answer = await page.evaluate(() => {
     // cookies
-    const HTTPClientBro = window.mikosoft.HTTPClientBro;
+    const HTTPClientBro = window.mikosoft.HTTPClientBroFetch;
     const opts = {
       encodeURI: false,
       timeout: 8000,
@@ -55,7 +68,7 @@ A puppeteer example.
       }
     };
     const httpClientBro = new HTTPClientBro(opts);
-    const answer = httpclientBro.askJSON('https://jsonplaceholder.typicode.com/todos/1');
+    const answer = httpClientBro.askJSON('https://jsonplaceholder.typicode.com/todos/1');
     return answer;
 });
 
@@ -65,9 +78,9 @@ console.log('answer::', answer);
 
 ## Access by ESM (ECMAScript Modules)
 ```js
-import { HTTPClientBro } from '@mikosoft/httpclient-bro';
+import {HTTPClientBroXHR, HTTPClientBroFetch} from '@mikosoft/httpclient-bro';
 
-const httpClientBro = new HTTPClientBro(cookieOpts);
+const httpClientBro = new HTTPClientBroFetch(opts);
 ```
 
 
@@ -76,6 +89,7 @@ const httpClientBro = new HTTPClientBro(cookieOpts);
 #### constructor(opts:{encodeURI:boolean, timeout:number, retry:number, retryDelay:number, maxRedirects:number, headers:object})
 - **encodeURI**	Encode URI before request is sent.	(false)
 - **timeout**	Close socket on certain period of time in milliseconds. Same as timeout in NodeJS HTTP library.	(8000)
+- **responseType**	xhr.responseType: 'text'|'json'|'document'|'blob' ... - [see doc](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
 - **retry**	When HTTP Client receives an error response it will try to send requests repeatedly. The retry number determines the max allowed retries.	(3)
 - **retryDelay**	Time delay after each retry in milliseconds.	(5500)
 - **maxRedirects**	When HTTP Client receives 301 in Header response it will try to send new request to redirected URL. Number maxRedirects determines max redirects allowed to prevent infinite loops.	(3)

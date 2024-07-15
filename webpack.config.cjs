@@ -9,8 +9,10 @@ module.exports = {
   mode: 'production',
   stats: { warnings: true },
   entry: {
-    'httpclient-bro': './index.js',
-    'httpclient-bro.min': './index.js'
+    'httpclient-bro-xhr': './HTTPClientBroXHR.js',
+    'httpclient-bro-xhr.min': './HTTPClientBroXHR.js',
+    'httpclient-bro-fetch': './HTTPClientBroFetch.js',
+    'httpclient-bro-fetch.min': './HTTPClientBroFetch.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),

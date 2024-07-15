@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 var __webpack_exports__ = {};
-class HTTPClientBro {
+class HTTPClientBroXHR {
 
   /**
    * Opts {
@@ -174,18 +174,31 @@ class HTTPClientBro {
       };
 
 
+
+      /*** TIMOUT ***/
       this.xhr.ontimeout = () => {
         this.kill();
-
         // format answer
         const ans = { ...answer }; // clone object to prevent overwrite of object properies once promise is resolved
         ans.status = 408; // 408 - timeout
         ans.statusMessage = `Request aborted due to timeout (${this.opts.timeout} ms) ${url} `;
         ans.time.res = this._getTime();
         ans.time.duration = this._getTimeDiff(ans.time.req, ans.time.res);
-
         resolve(ans);
       };
+
+      // force timeout when server doesn't send response
+      setTimeout(() => {
+        // format answer
+        const ans = { ...answer }; // clone object to prevent overwrite of object properies once promise is resolved
+        ans.status = 408; // 408 - timeout
+        ans.statusMessage = `Server did not respond and timeout is forced after ${this.timeout} ms.`;
+        ans.time.res = this._getTime();
+        ans.time.duration = this._getTimeDiff(ans.time.req, ans.time.res);
+        resolve(ans);
+      }, this.timeout);
+
+
 
     });
 
@@ -618,17 +631,15 @@ class HTTPClientBro {
 }
 
 
-
 // ESM
-/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (HTTPClientBro)));
-
+/* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (HTTPClientBroXHR)));
 
 // window
 if (typeof window !== 'undefined') {
   if (!window.mikosoft) { window.mikosoft = {}; }
-  window.mikosoft.HTTPClientBro = HTTPClientBro;
+  window.mikosoft.HTTPClientBroXHR = HTTPClientBroXHR;
 }
 
 /******/ })()
 ;
-//# sourceMappingURL=httpclient-bro.js.map
+//# sourceMappingURL=httpclient-bro-xhr.js.map

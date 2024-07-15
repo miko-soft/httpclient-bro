@@ -38,14 +38,14 @@ const main = async () => {
   await page.goto('https://www.adsuu.com');
 
   // inject to Chromium browser via <script> tag
-  await page.addScriptTag({ path: '../build/httpclient-bro.min.js' });
+  await page.addScriptTag({ path: '../build/httpclient-bro-xhr.min.js' });
 
   const answer = await page.evaluate(() => {
     // cookies
-    const HTTPClientBro = window.mikosoft.HTTPClientBro;
+    const HTTPClientBro = window.mikosoft.HTTPClientBroXHR; // XHR (XMLHttpRequest) used
     const opts = {
       encodeURI: false,
-      timeout: 8000,
+      timeout: 10,
       responseType: '', // 'blob' for file download (https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType)
       retry: 3,
       retryDelay: 5500,
